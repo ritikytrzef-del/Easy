@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Watch Ads App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #006bb3;
+        }
+        #adContainer {
+            margin-top: 20px;
+        }
+    </style>
+    <!-- AdExtra SDK Script -->
+    <script async src="https://partner.adextra.io/jt/ec47ce5f54a91da793061abb691bfc6da41409a4.js"></script>
+</head>
+<body>
+    <h1>Watch Ads to Earn Rewards</h1>
+    <button onclick="showAd()">Watch Ads</button>
+    <div id="ec47ce5f54a91da793061abb691bfc6da41409a4" style="width: 100%; height: 0;"></div>
+
+    <script>
+        // Telegram Web App Initialization
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+
+        // AdExtra Initialization
+        window.AdExtra = window.AdExtra || [];
+        AdExtra.init({
+            appId: '892', // Replace with your actual App ID from AdExtra dashboard
+            adUnitId: 'ec47ce5f54a91da793061abb691bfc6da41409a4',
+            onAdLoaded: function() {
+                console.log('Ad loaded successfully!');
+            },
+            onAdError: function(error) {
+                console.error('Ad error:', error);
+            }
+        });
+
+        // Function to show ad on button click
+        function showAd() {
+            AdExtra.showAd('ec47ce5f54a91da793061abb691bfc6da41409a4', {
+                type: 'rewarded_video',
+                rewardCallback: function(reward) {
+                    alert('Reward earned: ' + reward + ' points!');
+                },
+                onClose: function() {
+                    console.log('Ad closed by user');
+                }
+            });
+        }
+
+        // Load ad when page loads
+        window.addEventListener('load', function() {
+            AdExtra.loadAd('ec47ce5f54a91da793061abb691bfc6da41409a4');
+        });
+    </script>
+</body>
+</html>
